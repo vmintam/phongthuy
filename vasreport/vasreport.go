@@ -3,9 +3,11 @@ package main
 import (
 	//	"net/http"
 	"database/sql"
+	"fmt"
 	"os"
 	log "phongthuy/utilities/logging"
 	"strings"
+	"time"
 
 	"github.com/BurntSushi/toml"
 	_ "github.com/go-sql-driver/mysql"
@@ -38,6 +40,7 @@ const (
 	VAS_MADV_ACTIVE     = `MADV_active_%s`
 	VAS_MADV_REGISTER   = `MADV_register_%s`
 	VAS_MADV_UNREGISTER = `MADV_unregister_%s`
+	LAYOUT              = "20060201"
 )
 
 func init() {
@@ -70,21 +73,61 @@ func init() {
 	}
 }
 
+func getYesterday() string {
+	return time.Now().AddDate(0, 0, -1).Format(LAYOUT)
+
+}
+
+type ACTIVE struct {
+	Msisdn    string
+	SubCode   string
+	StartDate string
+	EndDate   string
+}
+
+func activeHandle() (result string, err error) {
+	rows, err := sqldb.Query("SELECT msisdn,subCode,lastchargedate as startdate, enddate as enddate FROM userbases where status in (1,2,4) ;")
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	for rows.Next() {
+		r := ACTIVE{}
+		if err := rows.Scan(&r.Msisdn, &r.SubCode, &r.StartDate, &r.EndDate); err != nil {
+			log.Error("Mysql error %s", err)
+			return "", err
+		}
+		result = result + fmt.Sprintf("%s,%s,%s,%s\n", r.Msisdn, r.SubCode, r.StartDate, r.EndDate)
+	}
+	return result, nil
+}
+
+func registerHandle() {
+
+}
+
+func unRegisterHandle() {
+
+}
 func main() {
-	client, err := ftp.Connect("45.32.110.39:21")
+
+	active, err := activeHandle()
+	if err != nil {
+		log.Error("%v", err)
+	}
+	client, err := ftp.Connect(conf.Misc.VAS_FTP)
 	if err != nil {
 		panic(err)
 	}
 	defer client.Quit()
 
-	err = client.Login("bachbenh", "sjgkdfjg233f")
+	err = client.Login(conf.Misc.VAS_USERNAME, conf.Misc.VAS_PASSWORD)
 	if err != nil {
 		panic(err)
 	}
-	test := "day la line 1\n"
-	test = test + "day la line 2\n"
-	err = client.Stor("save.jpg", strings.NewReader(test))
+	err = client.Stor(fmt.Sprintf(VAS_MADV_ACTIVE, getYesterday()), strings.NewReader(active))
 	if err != nil {
 		panic(err)
 	}
+	activeHandle()
 }
