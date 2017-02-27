@@ -258,7 +258,7 @@ func CreateUser(phone string, password string) (resp Response) {
 	create_user.Add("received_sms", "0")
 	create_user.Add("password", password)
 	log.Info("POST with data msisdn %s, password %s ", phone, password)
-	body, err := post(API_UPDATE_PASSWORD, bytes.NewBufferString(create_user.Encode()))
+	body, err := post(API_CREATE_USER, bytes.NewBufferString(create_user.Encode()))
 	if err != nil {
 		log.Error("%v", err)
 		return
