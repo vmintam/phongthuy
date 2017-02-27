@@ -1,0 +1,185 @@
+package test
+
+import (
+	"net/http"
+	log "phongthuy/utilities/logging"
+	//	"strings"
+	"bytes"
+	"crypto/tls"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"math/rand"
+	"net/url"
+	"os"
+	"time"
+
+	"github.com/jackdanger/collectlinks"
+)
+
+const (
+	CALLBACK            = `/callback_authentication`
+	SPID                = `001011`
+	CPID                = `001011`
+	USERNAME            = `phongthuynguhanh`
+	PASSWORD            = `phongthuy@123p`
+	API_CREATE_USER     = `http://cms.phongthuynguhanh.com.vn/api/savecustomer.html`
+	API_UPDATE_CATE     = `http://cms.phongthuynguhanh.com.vn/api/updatepackagecustomer.html`
+	API_UPDATE_STATUS   = `http://cms.phongthuynguhanh.com.vn/api/updatestatuscustomer.html`
+	API_UPDATE_PASSWORD = `http://cms.phongthuynguhanh.com.vn/api/updatestatuscustomer.html`
+)
+
+func post(url string, data *bytes.Buffer) (body []byte, err error) {
+	log.Info("URL %s", url)
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	timeout := time.Duration(30 * time.Second)
+	client := &http.Client{
+		Timeout:   timeout,
+		Transport: tr,
+	}
+	r, _ := http.NewRequest("POST", url, data) // <-- URL-encoded payload
+	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	resp, err := client.Do(r)
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Error("%v", err)
+		return
+	}
+	return
+
+}
+
+type Response struct {
+	Error json.Number `json:"err,Number"`
+	Msg   string      `json:"msg"`
+}
+
+func random(min, max int) int {
+	rand.Seed(time.Now().Unix())
+	return rand.Intn(max-min) + min
+}
+
+const (
+	LAYOUT = "2006-02-01 15:04:01"
+)
+
+func testCmsApi() {
+	myrand := random(100000, 999999)
+	create_user := url.Values{}
+	create_user.Set("phone", "841225236969")
+	create_user.Add("status", "1")
+	create_user.Add("received_sms", "0")
+	create_user.Add("password", fmt.Sprintf("%d", myrand))
+
+	resp, err := post(API_CREATE_USER, bytes.NewBufferString(create_user.Encode()))
+	if err != nil {
+		log.Error("%v", err)
+		return
+	}
+	var test int64
+	test = 1
+	//decode response
+	time.Sleep(time.Second * time.Duration(test))
+	body := Response{}
+	err = json.Unmarshal(resp, &body)
+	log.Info("resp nhan duoc tu API %s %+v", API_CREATE_USER, body)
+	if body.Error == "0" {
+		log.Info("done")
+	} else if body.Error == "2" {
+		log.Info("cung done")
+	} else {
+		log.Info("die")
+	}
+}
+
+func usage() {
+	fmt.Fprintf(os.Stderr, "usage: crawl http://example.com/path/file.html\n")
+	flag.PrintDefaults()
+	os.Exit(2)
+}
+
+//func main() {
+//	flag.Usage = usage
+//	flag.Parse()
+
+//	args := flag.Args()
+//	fmt.Println(args)
+//	if len(args) < 1 {
+//		usage()
+//		fmt.Println("Please specify start page")
+//		os.Exit(1)
+//	}
+
+//	queue := make(chan string)
+//	filteredQueue := make(chan string)
+
+//	go func() { queue <- args[0] }()
+//	go filterQueue(queue, filteredQueue)
+
+//	// pull from the filtered queue, add to the unfiltered queue
+//	for uri := range filteredQueue {
+//		enqueue(uri, queue)
+//	}
+//}
+
+func filterQueue(in chan string, out chan string) {
+	var seen = make(map[string]bool)
+	for val := range in {
+		if !seen[val] {
+			seen[val] = true
+			out <- val
+		}
+	}
+}
+
+func enqueue(uri string, queue chan string) {
+	fmt.Println("fetching", uri)
+	transport := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
+	}
+	client := http.Client{Transport: transport}
+	resp, err := client.Get(uri)
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+
+	links := collectlinks.All(resp.Body)
+
+	for _, link := range links {
+		absolute := fixUrl(link, uri)
+		if uri != "" {
+			go func() { queue <- absolute }()
+		}
+	}
+}
+
+func fixUrl(href, base string) string {
+	uri, err := url.Parse(href)
+	if err != nil {
+		return ""
+	}
+	baseUrl, err := url.Parse(base)
+	if err != nil {
+		return ""
+	}
+	uri = baseUrl.ResolveReference(uri)
+	return uri.String()
+}
+
+//func main() {
+//	//	testCmsApi()
+//	now := time.Now().Format(LAYOUT)
+//	fmt.Println(now)
+
+//}
