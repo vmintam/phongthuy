@@ -40,7 +40,8 @@ const (
 	VAS_MADV_ACTIVE     = `MADV_active_%s`
 	VAS_MADV_REGISTER   = `MADV_register_%s`
 	VAS_MADV_UNREGISTER = `MADV_unregister_%s`
-	LAYOUT              = "20060201"
+	LAYOUT_FPT          = "20060201"
+	LAYOUT_DB           = "2006-02-01"
 )
 
 func init() {
@@ -73,8 +74,13 @@ func init() {
 	}
 }
 
-func getYesterday() string {
-	return time.Now().AddDate(0, 0, -1).Format(LAYOUT)
+func getYesterdayFTP() string {
+	return time.Now().AddDate(0, 0, -1).Format(LAYOUT_FPT)
+
+}
+
+func getYesterdayDB() string {
+	return time.Now().AddDate(0, 0, -1).Format(LAYOUT_DB)
 
 }
 
@@ -83,6 +89,23 @@ type ACTIVE struct {
 	SubCode   string
 	StartDate string
 	EndDate   string
+}
+
+type REGISTER struct {
+	Msisdn    string
+	SubCode   string
+	StartDate string
+	EndDate   string
+	Status    string
+	Channel   string
+}
+
+type UNREGISTER struct {
+	Msisdn    string
+	SubCode   string
+	StartDate string
+	EndDate   string
+	Channel   string
 }
 
 func activeHandle() (result string, err error) {
@@ -102,16 +125,66 @@ func activeHandle() (result string, err error) {
 	return result, nil
 }
 
-func registerHandle() {
-
+var EStatusType = map[string]int{
+	"4": 0, //gia han
+	"1": 1, //dk moi
+	"2": 2, //dk lai
 }
 
-func unRegisterHandle() {
+var EType = map[string]int{
+	"SMS":    0, //huy tu sms
+	"CongTT": 1, //huy tu he thong
+	"CSKH":   1, //huy tu he thong
+	"WEB":    0, //huy tu web
+}
 
+//report user gia han, dk moi, dk lai trong ngay MSISDN,Magoi,StartDate,EndDate,Type, channel
+func registerHandle() (result string, err error) {
+	query := fmt.Sprintf("SELECT msisdn,subCode,lastchargedate as startdate, enddate as enddate, status, source FROM userbases where status in (1,2,4) and updated_at > '%s 00:00:00' and updated_at <= '%s 23:59:59';", getYesterdayDB(), getYesterdayDB())
+	rows, err := sqldb.Query(query)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	for rows.Next() {
+		r := REGISTER{}
+		if err := rows.Scan(&r.Msisdn, &r.SubCode, &r.StartDate, &r.EndDate, &r.Status, &r.Channel); err != nil {
+			log.Error("Mysql error %s", err)
+			return "", err
+		}
+		result = result + fmt.Sprintf("%s,%s,%s,%s,%d,%s\n", r.Msisdn, r.SubCode, r.StartDate, r.EndDate, EStatusType[r.Status], r.Channel)
+	}
+	return result, nil
+}
+
+func unRegisterHandle() (result string, err error) {
+	query := fmt.Sprintf("SELECT msisdn,subCode,lastchargedate as startdate, enddate as enddate, source FROM userbases where status=3 and updated_at > '%s 00:00:00' and updated_at <= '%s 23:59:59';", getYesterdayDB(), getYesterdayDB())
+	rows, err := sqldb.Query(query)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	for rows.Next() {
+		r := UNREGISTER{}
+		if err := rows.Scan(&r.Msisdn, &r.SubCode, &r.StartDate, &r.EndDate, &r.Channel); err != nil {
+			log.Error("Mysql error %s", err)
+			return "", err
+		}
+		result = result + fmt.Sprintf("%s,%s,%s,%s,%d,%s\n", r.Msisdn, r.SubCode, r.StartDate, r.EndDate, EType[r.Channel], r.Channel)
+	}
+	return result, nil
 }
 func main() {
 
 	active, err := activeHandle()
+	if err != nil {
+		log.Error("%v", err)
+	}
+	register, err := registerHandle()
+	if err != nil {
+		log.Error("%v", err)
+	}
+	unregister, err := unRegisterHandle()
 	if err != nil {
 		log.Error("%v", err)
 	}
@@ -125,9 +198,19 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = client.Stor(fmt.Sprintf(VAS_MADV_ACTIVE, getYesterday()), strings.NewReader(active))
+	//day file active
+	err = client.Stor(fmt.Sprintf(VAS_MADV_ACTIVE, getYesterdayFTP()), strings.NewReader(active))
 	if err != nil {
 		panic(err)
 	}
-	activeHandle()
+	//day file register
+	err = client.Stor(fmt.Sprintf(VAS_MADV_REGISTER, getYesterdayFTP()), strings.NewReader(register))
+	if err != nil {
+		panic(err)
+	}
+	//day file unregister
+	err = client.Stor(fmt.Sprintf(VAS_MADV_UNREGISTER, getYesterdayFTP()), strings.NewReader(unregister))
+	if err != nil {
+		panic(err)
+	}
 }
