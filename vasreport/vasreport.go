@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"os"
 	log "phongthuy/utilities/logging"
-	"strings"
+	//	"strings"
+	"io/ioutil"
 	"time"
 
 	"github.com/BurntSushi/toml"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jlaffaye/ftp"
 )
 
 type MySqlConf struct {
@@ -37,11 +37,14 @@ var (
 )
 
 const (
-	VAS_MADV_ACTIVE     = `MADV_active_%s`
-	VAS_MADV_REGISTER   = `MADV_register_%s`
-	VAS_MADV_UNREGISTER = `MADV_unregister_%s`
-	LAYOUT_FPT          = "20060201"
-	LAYOUT_DB           = "2006-02-01"
+	VAS_MADV_ACTIVE     = `files/phongthuynguhanh_active_%s.txt`
+	VAS_MADV_REGISTER   = `files/phongthuynguhanh_register_%s.txt`
+	VAS_MADV_UNREGISTER = `files/phongthuynguhanh_unregister_%s.txt`
+	KPI_REGISTER        = `files/phongthuynguhanh_REG_SUCC_%s.txt`
+	KPI_UNREGISTER      = `files/phongthuynguhanh_DEL_SUCC_%s.txt`
+	KPI_EXTEND          = `files/phongthuynguhanh_EXT_SUCC_%s.txt`
+	LAYOUT_FPT          = "20060102"
+	LAYOUT_DB           = "2006-01-02"
 )
 
 func init() {
@@ -138,9 +141,22 @@ var EType = map[string]int{
 	"WEB":    0, //huy tu web
 }
 
+var ETypeALl = map[string]int{
+	"USER_REGISTER":      1,
+	"SYSTEM_UNREGISTER":  2,
+	"FORWARD":            3,
+	"SYSTEM_CONTENT":     4,
+	"USER_UNREGISTER":    5,
+	"USER_RE_REGISTER":   6,
+	"SYSTEM_EXTEND":      7,
+	"SYSTEM_REGISTER":    8,
+	"SYSTEM_RE_REGISTER": 9,
+}
+
 //report user gia han, dk moi, dk lai trong ngay MSISDN,Magoi,StartDate,EndDate,Type, channel
 func registerHandle() (result string, err error) {
-	query := fmt.Sprintf("SELECT msisdn,subCode,lastchargedate as startdate, enddate as enddate, status, source FROM userbases where status in (1,2,4) and updated_at > '%s 00:00:00' and updated_at <= '%s 23:59:59';", getYesterdayDB(), getYesterdayDB())
+	query := fmt.Sprintf("SELECT msisdn,subCode, lastchargedate as startdate, enddate as enddate, status, source FROM userbases where status in (1,2,4) and updated_at > '%s 00:00:00' and updated_at <= '%s 23:59:59';", getYesterdayDB(), getYesterdayDB())
+	fmt.Println(query)
 	rows, err := sqldb.Query(query)
 	if err != nil {
 		log.Error("%v", err)
@@ -159,6 +175,7 @@ func registerHandle() (result string, err error) {
 
 func unRegisterHandle() (result string, err error) {
 	query := fmt.Sprintf("SELECT msisdn,subCode,lastchargedate as startdate, enddate as enddate, source FROM userbases where status=3 and updated_at > '%s 00:00:00' and updated_at <= '%s 23:59:59';", getYesterdayDB(), getYesterdayDB())
+	fmt.Println(query)
 	rows, err := sqldb.Query(query)
 	if err != nil {
 		log.Error("%v", err)
@@ -174,43 +191,135 @@ func unRegisterHandle() (result string, err error) {
 	}
 	return result, nil
 }
+
+//kpi register
+func kpi_registerHandle() (result string, err error) {
+	var total int
+	var total_suc int
+	//query total
+	query_total := fmt.Sprintf("SELECT count(*) as total FROM history_%s where type in (1,6,8,9) limit 1;", getYesterdayFTP())
+	fmt.Println(query_total)
+	err = sqldb.QueryRow(query_total).Scan(&total)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	query_suc := fmt.Sprintf("SELECT count(*) as total_suc FROM history_%s where type in (1,6,8,9) and errorcode != 'WCG-0001' limit 1;", getYesterdayFTP())
+	fmt.Println(query_suc)
+	err = sqldb.QueryRow(query_suc).Scan(&total_suc)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	result = fmt.Sprintf("%d,%d,%.2f", total, total_suc, float32(total_suc/total)*100) + "%"
+	return result, nil
+}
+
+//kpi unregister
+func kpi_unregisterHandle() (result string, err error) {
+	var total int
+	var total_suc int
+	//query total
+	query_total := fmt.Sprintf("SELECT count(*) as total FROM history_%s where type in (2,5) limit 1;", getYesterdayFTP())
+	fmt.Println(query_total)
+	err = sqldb.QueryRow(query_total).Scan(&total)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	query_suc := fmt.Sprintf("SELECT count(*) as total_suc FROM history_%s where type in (5,2) and errorcode != 'WCG-0001' limit 1;", getYesterdayFTP())
+	fmt.Println(query_suc)
+	err = sqldb.QueryRow(query_suc).Scan(&total_suc)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	result = fmt.Sprintf("%d,%d,%.2f", total, total_suc, float32(total_suc/total)*100) + "%"
+	return result, nil
+}
+
+//kpi extend
+func kpi_extendHandle() (result string, err error) {
+	var total int
+	var total_suc int
+	//query total
+	query_total := fmt.Sprintf("SELECT count(*) as total FROM cdr_%s where type=7 limit 1;", getYesterdayFTP())
+	fmt.Println(query_total)
+	err = sqldb.QueryRow(query_total).Scan(&total)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	query_suc := fmt.Sprintf("SELECT count(*) as total_suc FROM cdr_%s where type=7 and errorcode != 'WCG-0010' limit 1;", getYesterdayFTP())
+	fmt.Println(query_suc)
+	err = sqldb.QueryRow(query_suc).Scan(&total_suc)
+	if err != nil {
+		log.Error("%v", err)
+		return "", err
+	}
+	result = fmt.Sprintf("%d,%d,%.2f", total, total_suc, float32(total_suc/total)*100) + "%"
+	return result, nil
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func main() {
 
 	active, err := activeHandle()
 	if err != nil {
 		log.Error("%v", err)
 	}
+	fmt.Println(active)
 	register, err := registerHandle()
 	if err != nil {
 		log.Error("%v", err)
 	}
+	fmt.Println(register)
 	unregister, err := unRegisterHandle()
 	if err != nil {
 		log.Error("%v", err)
 	}
-	client, err := ftp.Connect(conf.Misc.VAS_FTP)
-	if err != nil {
-		panic(err)
-	}
-	defer client.Quit()
+	fmt.Println(unregister)
 
-	err = client.Login(conf.Misc.VAS_USERNAME, conf.Misc.VAS_PASSWORD)
+	//kpi reg
+	kpi_reg, err := kpi_registerHandle()
 	if err != nil {
-		panic(err)
+		log.Error("%v", err)
 	}
+	fmt.Println(kpi_reg)
+
+	kpi_unreg, err := kpi_unregisterHandle()
+	if err != nil {
+		log.Error("%v", err)
+	}
+	fmt.Println(kpi_unreg)
+
+	kpi_extend, err := kpi_extendHandle()
+	if err != nil {
+		log.Error("%v", err)
+	}
+	fmt.Println(kpi_extend)
+
 	//day file active
-	err = client.Stor(fmt.Sprintf(VAS_MADV_ACTIVE, getYesterdayFTP()), strings.NewReader(active))
-	if err != nil {
-		panic(err)
-	}
+	err = ioutil.WriteFile(fmt.Sprintf(VAS_MADV_ACTIVE, getYesterdayFTP()), []byte(active), 0644)
+	check(err)
 	//day file register
-	err = client.Stor(fmt.Sprintf(VAS_MADV_REGISTER, getYesterdayFTP()), strings.NewReader(register))
-	if err != nil {
-		panic(err)
-	}
+	err = ioutil.WriteFile(fmt.Sprintf(VAS_MADV_REGISTER, getYesterdayFTP()), []byte(register), 0644)
+	check(err)
+
 	//day file unregister
-	err = client.Stor(fmt.Sprintf(VAS_MADV_UNREGISTER, getYesterdayFTP()), strings.NewReader(unregister))
-	if err != nil {
-		panic(err)
-	}
+	err = ioutil.WriteFile(fmt.Sprintf(VAS_MADV_UNREGISTER, getYesterdayFTP()), []byte(unregister), 0644)
+	check(err)
+
+	//dong bo KPI vasreport
+	err = ioutil.WriteFile(fmt.Sprintf(KPI_EXTEND, getYesterdayFTP()), []byte(kpi_extend), 0644)
+	check(err)
+	err = ioutil.WriteFile(fmt.Sprintf(KPI_REGISTER, getYesterdayFTP()), []byte(kpi_reg), 0644)
+	check(err)
+	err = ioutil.WriteFile(fmt.Sprintf(KPI_UNREGISTER, getYesterdayFTP()), []byte(kpi_unreg), 0644)
+	check(err)
 }

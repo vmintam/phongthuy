@@ -43,7 +43,7 @@ const (
 	USERNAME                = `phongthuynguhanh`
 	PASSWORD                = `phongthuy@123p`
 	ERROR_CONGTT_SUCCESSFUL = "WCG-0000"
-	LAYOUT                  = "2006-02-01 15:04:01"
+	LAYOUT                  = "2006-01-02 15:04:01" // phai la 2006-01-02, ko duoc 2006-02-01
 )
 
 func GenerateMd5(str string) string {
@@ -165,7 +165,7 @@ func CallBack_Handler(ctx *gin.Context) {
 			ServiceCode:   "PTNH",
 			SubCode:       strings.Trim(pkg_code, " "),
 			ShortCode:     shortcode,
-			SmsMO:         "",
+			SmsMO:         fmt.Sprintf("dk gói cước %s", pkg_code),
 			Price:         price,
 			SmsMT:         fmt.Sprintf("ĐK trên website http://phongthuynguhanh.com.vn"),
 			Source:        "WEB",

@@ -333,7 +333,37 @@ func RegisterHandler(body []byte) bool {
 					ShortCode:     newAction.ShortCode,
 					SmsMO:         "",
 					SubCode:       EMessageType["SYSTEM_CONTENT"],
-					SmsMT:         fmt.Sprintf("mat khau truy cap website http://phongthuynguhanh.com.vn cua quy khach la: %d", myrand),
+					SmsMT:         fmt.Sprintf("Mời bạn truy cập http://phongthuynguhanh.com.vn để sử dụng dịch vụ. user truy cập: %s, mật khẩu: %d .Trân trọng cảm ơn", newAction.Msisdn, myrand),
+					Type:          newAction.Type,
+					RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
+					TransactionID: newAction.TransactionID,
+				}
+				send_mt_json, _ := json.Marshal(send_mt)
+				//push
+				gs.PushMsg <- send_mt_json
+			} else if resp.Error == "2" {
+				//TODO update password
+				update_pass := url.Values{}
+				update_pass.Set("phone", newAction.Msisdn)
+				update_pass.Add("password", fmt.Sprintf("%d", myrand))
+				log.Info("POST with data msisdn %s, password %s ", newAction.Msisdn, fmt.Sprintf("%d", myrand))
+				resp, err := post(API_UPDATE_PASSWORD, bytes.NewBufferString(update_pass.Encode()))
+				if err != nil {
+					log.Error("%v", err)
+					return false
+				}
+				log.Info("resp from API %s", string(resp))
+				//send to mt queue
+				//send password
+				send_mt := SendMsg{
+					Interaction:   "waiting_mt_send",
+					Source:        newAction.Source,
+					Msisdn:        newAction.Msisdn,
+					TimeStamp:     time.Now().Format(LAYOUT),
+					ShortCode:     newAction.ShortCode,
+					SmsMO:         "",
+					SubCode:       EMessageType["SYSTEM_CONTENT"],
+					SmsMT:         fmt.Sprintf("Mời bạn truy cập http://phongthuynguhanh.com.vn để sử dụng dịch vụ. user truy cập: %s, mật khẩu: %d .Trân trọng cảm ơn", newAction.Msisdn, myrand),
 					Type:          newAction.Type,
 					RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
 					TransactionID: newAction.TransactionID,
