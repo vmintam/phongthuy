@@ -155,11 +155,24 @@ func CallBack_Handler(ctx *gin.Context) {
 	if strings.HasPrefix(msisdn, "0") {
 		msisdn = strings.Replace(msisdn, string(msisdn[0]), "84", 1)
 	}
+	// check type is register or unregister
+	msg_type := ""
+	sms_content := ""
+	interaction := ""
+	if callback_type == "0" {
+		interaction = "recevie_un_register_sub"
+		sms_content = "hủy trên website http://phongthuynguhanh.com.vn"
+		msg_type = EMessageType["USER_UNREGISTER"]
+	} else {
+		interaction = "recevie_register_sub"
+		sms_content = "ĐK trên website http://phongthuynguhanh.com.vn"
+		msg_type = EMessageType["USER_REGISTER"]
+	}
 	//check status code
 	if resultCode == ERROR_CONGTT_SUCCESSFUL {
 		//TODO send password
 		send_mt := RegisterMsg{
-			Interaction:   "recevie_register_sub",
+			Interaction:   interaction,
 			Msisdn:        msisdn,
 			TimeStamp:     time.Now().Format(LAYOUT),
 			ServiceCode:   "PTNH",
@@ -167,11 +180,11 @@ func CallBack_Handler(ctx *gin.Context) {
 			ShortCode:     shortcode,
 			SmsMO:         fmt.Sprintf("dk gói cước %s", pkg_code),
 			Price:         price,
-			SmsMT:         fmt.Sprintf("ĐK trên website http://phongthuynguhanh.com.vn"),
+			SmsMT:         sms_content,
 			Source:        "WEB",
 			TransactionID: transaction_id,
 			ErrorCode:     resultCode,
-			Type:          EMessageType["USER_REGISTER"],
+			Type:          msg_type,
 		}
 
 		raw, _ := json.Marshal(send_mt)

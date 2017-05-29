@@ -48,9 +48,9 @@ type ServerConf struct {
 }
 
 type MiscConf struct {
-	RedirectTime int64  `toml:"redirect_time"`
-	DailyContent string `toml:"daily_content"`
-	VSType       int    `toml:"vs_content"`
+	RedirectTime    int64  `toml:"redirect_time"`
+	ThreeDayContent string `toml:"threeday_content"`
+	VSType          int    `toml:"vs_content"`
 }
 
 type BGConf struct {
@@ -66,15 +66,17 @@ var (
 )
 
 type GlobalSession struct {
-	Wait    sync.WaitGroup
-	PushMsg chan []byte
-	PushMT  chan []byte
+	Wait              sync.WaitGroup
+	PushMsgUnRegister chan []byte
+	PushMsgRegister   chan []byte
+	PushMT            chan []byte
 }
 
 var gs *GlobalSession = &GlobalSession{
-	Wait:    sync.WaitGroup{},
-	PushMsg: make(chan []byte, 10),
-	PushMT:  make(chan []byte, 10),
+	Wait:              sync.WaitGroup{},
+	PushMsgRegister:   make(chan []byte, 10),
+	PushMsgUnRegister: make(chan []byte, 10),
+	PushMT:            make(chan []byte, 10),
 }
 
 const (
@@ -242,12 +244,12 @@ func Sendmsg_Handler(ctx *gin.Context) {
 		return
 	}
 	log.Info("POST with data %v", phones.Msisdns)
-	content := ""
-	if phones.Type == conf.Misc.VSType {
-		content = getContentByDay()
-	} else {
-		content = conf.Misc.DailyContent
-	}
+	//	content := ""
+	//	if phones.Type == conf.Misc.VSType {
+	//		content = getContentByDay()
+	//	} else {
+	//		content = conf.Misc.ThreeDayContent
+	//	}
 
 	//build msg
 	for _, msisdn := range phones.Msisdns {
@@ -259,7 +261,7 @@ func Sendmsg_Handler(ctx *gin.Context) {
 			ShortCode:     "9432",
 			SmsMO:         "",
 			SubCode:       "",
-			SmsMT:         content,
+			SmsMT:         fmt.Sprintf(conf.Misc.ThreeDayContent, msisdn),
 			Type:          EMessageType["SYSTEM_CONTENT"],
 			RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
 			TransactionID: fmt.Sprintf("%s%d", "trans_", time.Now().UnixNano()),
@@ -282,14 +284,22 @@ func Adapter_Handler(ctx *gin.Context) {
 	}
 	raw, _ := json.Marshal(register)
 	//push
-	gs.PushMsg <- raw
+	if register.Interaction == "recevie_register_sub" {
+		gs.PushMsgRegister <- raw
+	} else {
+		gs.PushMsgUnRegister <- raw
+	}
+
 	log.Info("send to rabbitmq OK")
 }
 
 func main() {
 	//make proceducer
 	gs.Wait.Add(1)
-	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_register_sub"].Key, gs.PushMsg)
+	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_register_sub"].Key, gs.PushMsgRegister)
+
+	gs.Wait.Add(1)
+	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_un_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_register_sub"].Key, gs.PushMsgUnRegister)
 
 	gs.Wait.Add(1)
 	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["waiting_mt_send"].Exchange, conf.RabbitMq.Producer["waiting_mt_send"].Key, gs.PushMT)

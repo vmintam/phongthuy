@@ -26,6 +26,7 @@ type MiscConf struct {
 	SendDaily    int32  `toml:"send_daily"`
 	SendThreeDay int32  `toml:"send_threeday"`
 	Url          string `toml:"url"`
+	Content      string `toml:"content"`
 }
 type BGConf struct {
 	MySql MySqlConf `toml:"mysql"`
@@ -38,10 +39,8 @@ var (
 )
 
 const (
-	DAILY_TYPE         = 1
-	THREEDAY_TYPE      = 2
-	POST_DAILY_TYPE    = 1
-	POST_THREEDAY_TYPE = 2
+	DAILY_TYPE    = 0
+	THREEDAY_TYPE = 1
 )
 
 func init() {
@@ -103,7 +102,7 @@ func post(url string, data []byte) (body []byte, err error) {
 }
 
 func getPhoneReceiveSms(kind int) (msisdns []string, err error) {
-	sql := fmt.Sprintf("SELECT phone from customer where received_sms=%d ;", kind)
+	sql := fmt.Sprintf("SELECT c.phone from customer c INNER JOIN customer_package_rel a on c.id=a.customer_id  where c.received_sms=%d ;", kind)
 	log.Info("%s", sql)
 	var msisdn string
 	rows, err := sqldb.Query(sql)
@@ -123,8 +122,8 @@ func getPhoneReceiveSms(kind int) (msisdns []string, err error) {
 }
 
 type SENDMSG struct {
-	Phones []string `json:"phones"`
-	Kind   int      `json:"type"`
+	Msisdns []string `json:"msisdns"`
+	Kind    int      `json:"type"`
 }
 
 func main() {
@@ -138,8 +137,8 @@ func main() {
 	phones, err := getPhoneReceiveSms(kind)
 	log.Info("%s", phones)
 	sendmsg := SENDMSG{
-		Phones: phones,
-		Kind:   kind,
+		Msisdns: phones,
+		Kind:    kind,
 	}
 	data, err := json.Marshal(sendmsg)
 	if err != nil {
