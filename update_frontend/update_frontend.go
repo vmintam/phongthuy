@@ -286,6 +286,24 @@ func UpdatePackage(phone string, pkgcode string, kind string) (resp Response) {
 	return resp
 }
 
+
+//TODO update status of user
+func UpdateUserStatus(phone string, status string) (resp Response) {
+	ud_cate_req := url.Values{}
+	ud_cate_req.Set("phone", phone)
+	ud_cate_req.Add("status", status)
+
+	body, err := post(API_UPDATE_STATUS, bytes.NewBufferString(ud_cate_req.Encode()))
+	if err != nil {
+		log.Error("%v", err)
+		return
+	}
+	//decode response
+	err = json.Unmarshal(body, &resp)
+	log.Info("resp from API %s", string(body))
+	return resp
+}
+
 //TODO gap msg register -> check xem co phai dk lan dau ko ? neu dk lan dau -> send password vao mt_waiting_send, register vao web + goi tuong ung
 //TODO gap msg unregister -> delete goi trong frontend
 func UnRegisterHandler(body []byte) bool {
@@ -299,6 +317,10 @@ func UnRegisterHandler(body []byte) bool {
 		//update package vao web
 		resp_pkg := UpdatePackage(newAction.Msisdn, strings.Trim(newAction.SubCode, " "), "0")
 		if resp_pkg.Error != "0" {
+			return false
+		}
+		resp_status := UpdateUserStatus(newAction.Msisdn, "0")
+		if resp_status.Error != "0" {
 			return false
 		}
 	}

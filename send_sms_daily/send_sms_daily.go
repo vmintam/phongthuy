@@ -39,8 +39,8 @@ var (
 )
 
 const (
-	DAILY_TYPE    = 0
-	THREEDAY_TYPE = 1
+	DAILY_TYPE    = 1
+	THREEDAY_TYPE = 3
 )
 
 func init() {
@@ -101,8 +101,28 @@ func post(url string, data []byte) (body []byte, err error) {
 
 }
 
-func getPhoneReceiveSms(kind int) (msisdns []string, err error) {
-	sql := fmt.Sprintf("SELECT c.phone from customer c INNER JOIN customer_package_rel a on c.id=a.customer_id  where c.received_sms=%d ;", kind)
+func getPhoneReceiveSmsByDay() (msisdns []string, err error) {
+	sql := fmt.Sprintf("SELECT c.phone from customer c INNER JOIN customer_package_rel a on c.id=a.customer_id where c.status = 1 and c.received_sms=1 ;")
+	log.Info("%s", sql)
+	var msisdn string
+	rows, err := sqldb.Query(sql)
+	if err != nil {
+		log.Error("%v", err)
+		return
+	}
+	for rows.Next() {
+		err = rows.Scan(&msisdn)
+		if err != nil {
+			log.Error("%v", err)
+			return
+		}
+		msisdns = append(msisdns, msisdn)
+	}
+	return msisdns, nil
+}
+
+func getPhoneReceiveSmsByThreeDay() (msisdns []string, err error) {
+	sql := fmt.Sprintf("SELECT c.phone from customer c INNER JOIN customer_package_rel a on c.id=a.customer_id where c.status = 1 and c.received_sms != 1 ;")
 	log.Info("%s", sql)
 	var msisdn string
 	rows, err := sqldb.Query(sql)
@@ -130,25 +150,43 @@ func main() {
 	kind := 0
 	if conf.Misc.SendDaily == 1 {
 		kind = DAILY_TYPE
+		phones, err := getPhoneReceiveSmsByDay()
+		log.Info("%s", phones)
+		sendmsg := SENDMSG{
+			Msisdns: phones,
+			Kind:    kind,
+		}
+		data, err := json.Marshal(sendmsg)
+		if err != nil {
+			log.Error("%v", err)
+			os.Exit(1)
+		}
+		//SEND to service
+		_, err = post(conf.Misc.Url, data)
+		if err != nil {
+			log.Error("%v", err)
+			os.Exit(1)
+		}
 	}
 	if conf.Misc.SendThreeDay == 1 {
 		kind = THREEDAY_TYPE
+		phones, err := getPhoneReceiveSmsByThreeDay()
+		log.Info("%s", phones)
+		sendmsg := SENDMSG{
+			Msisdns: phones,
+			Kind:    kind,
+		}
+		data, err := json.Marshal(sendmsg)
+		if err != nil {
+			log.Error("%v", err)
+			os.Exit(1)
+		}
+		//SEND to service
+		_, err = post(conf.Misc.Url, data)
+		if err != nil {
+			log.Error("%v", err)
+			os.Exit(1)
+		}
 	}
-	phones, err := getPhoneReceiveSms(kind)
-	log.Info("%s", phones)
-	sendmsg := SENDMSG{
-		Msisdns: phones,
-		Kind:    kind,
-	}
-	data, err := json.Marshal(sendmsg)
-	if err != nil {
-		log.Error("%v", err)
-		os.Exit(1)
-	}
-	//SEND to service
-	_, err = post(conf.Misc.Url, data)
-	if err != nil {
-		log.Error("%v", err)
-		os.Exit(1)
-	}
+	os.Exit(1)
 }
