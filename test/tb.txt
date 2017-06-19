@@ -1,0 +1,368 @@
+Lê Ngọc Hương######P.CSKH######1######huongln######123456Abc
+Cao Thị Thanh Huyền######Tổ CSKH – CNHN1######1######gqkn_hn1######123456Abc
+Lê Thị Cúc Phương######Đài 1090######1######phuonglc######123456Abc
+Nguyễn Thu Hòa######Đài 1090######1######hoantvms1######123456Abc
+Ngô Thị Thu Hằng######Đài 1090######1######hangnt######123456Abc
+Phạm Hoàng Anh######Đài 1090######1######phanh######123456Abc
+Trần Quỳnh Vân######Đài 1090######1######vantq######123456Abc
+Thái Phương Liên######Đài 1090######1######lientp######123456Abc
+Nguyễn Hồng Vân######Đài 1090######1######vannh1######123456Abc
+Lưu Thị Hoàng Hiệp######Minh Phúc######1######c1_hieplth_mp######123456Abc
+Trần Lê Minh######Minh Phúc######1######c1_minhtl_mp######123456Abc
+Nguyễn Thị Thanh Huyền######Minh Phúc######1######c1_huyenntt4_mp######123456Abc
+Nguyễn Thị Mến######Minh Phúc######1######c1_mennt1_mp######123456Abc
+Phan Thị Lành######Trường Minh######1######c1_lanhpt_tm######123456Abc
+Nguyễn Văn Hiệp######Trường Minh######1######c1_hiepnv_tm######123456Abc
+Phạm Lô Giang######Trường Minh######1######c1_giangpl_tm######123456Abc
+Nguyễn Thị Bình######Trường Minh######1######c1_binhnt_tm######123456Abc
+Nguyễn Văn Bắc######MobiTechs######1######c1_bacnv_mbt######123456Abc
+Phan Thị Hồng Phương######MobiTechs######1######c1_phuongpth_mbt######123456Abc
+Đoàn Văn Trung######MobiTechs######1######c1_trungdv_mbt######123456Abc
+Đinh Thị Hải Hòa######MobiTechs######1######c1_hoadth_mbt######123456Abc
+Võ Hải Yến######Tổ CSKH-CNHN5######1######yenvh######123456Abc
+Vũ Công Nghĩa######P.KHDN&DVGTGT######1######nghiavc######123456Abc
+Trần Trung Lương######CNHN1######1######luongtt######123456Abc
+Nguyễn Mạnh Hùng######CNHN2######1######hungnm3######123456Abc
+Nguyễn Thị Trần Hạnh######CNHN3######1######hanhnt2######123456Abc
+Nguyễn Anh Tuấn######CNHN4######1######tuanna5######123456Abc
+Hoàng Minh Nhật######CNHN5######1######nhathm######123456Abc
+Trần Quang Quỳnh######Điện Biên######1######quynhtq######123456Abc
+Lê Chiến Thắng######Hà Nam######1######thanglc######123456Abc
+Nguyễn Thi Mai Loan######Hà Tĩnh######1######loannm######123456Abc
+Nguyễn Trường Giang######Hòa Bình######1######giangnt1######123456Abc
+Nguyễn Văn Kha######Lai Châu######1######khanv######123456Abc
+Trà Thị Nga My######Lào Cai######1######myttn######123456Abc
+Mai Huy Hùng######Nghệ An######1######hungmh######123456Abc
+Chu Anh Tuấn######Phú Thọ######1######tuananhc######123456Abc
+Nguyễn Mạnh Quang######Ninh Bình######1######quangnm######123456Abc
+Hoàng Đức Ánh######Sơn La######1######anhhd######123456Abc
+Lê Tư Cường######Thanh Hóa######1######cuonglt######123456Abc
+Đỗ Thành Trung######Vĩnh Phúc######1######trungdt######123456Abc
+Phạm Văn Chinh######Yên Bái######1######chinhpv######123456Abc
+Cao Thị Thanh Huyền######Tổ CSKH - CNHN1######1######gqkn_hn1######123456Abc
+mailt######P.KHDN&DVGTGT######1######mailt######123456Abc
+Vũ Thị Kim Thanh######Tổ KHDN – CNHN1######1######thanhvk######123456Abc
+Ngô Trần Kim Loan######P.KHDN&DVGTGT- TT2######1######loanntk######123456Abc
+Nguyễn Hữu Thông######P.KHDN&DVGTGT- TT2######1######thongnh######123456Abc
+Nguyễn Thị Hằng Nga######P.KHDN&DVGTGT- TT2######1######nganth1######123456Abc
+Ngô Thị Diệu Hằng######CNHCM6 – TT2######1######hangntd######123456Abc
+Lê Thanh Tâm######CNHCM6 – TT2######1######lthanhtama######123456Abc
+Trần Thị Huệ Tâm######CNHCM6 – TT2######1######tamtth######123456Abc
+Phạm Phương Tùng######P. CSKH – TT2######1######tungpp######123456Abc
+Nguyễn Thị Phương Thúy######CNHCM2 – TT2######1######thuyntp######123456Abc
+Hồ Thị Bạch Thu Hà######CNHCM2 – TT2######1######hahtbt######123456Abc
+Nguyễn Thị Thùy Trâm######CNHCM1 – TT2######1######tramntt1######123456Abc
+Trần Thị Huyền######CNHCM1 – TT2######1######tthihuyen######123456Abc
+Lê Huỳnh Bửu Nghiêm######CNHCM1 – TT2######1######nghiemlhb######123456Abc
+Ngô Thị Thu Lan######CNHCM1 – TT2######1######lanntt######123456Abc
+Lương Thị Tường Oanh######CNHCM1 – TT2######1######tuongoanh######123456Abc
+Đinh Thị Năm######CN HCM1 – TT2######1######namdt######123456Abc
+Nguyễn Hà Chi######CN HCM1 – TT2######1######chinh######123456Abc
+Trần Mỹ Yến######CN HCM1 – TT2######1######yentm######123456Abc
+Nguyễn Thị Hằng######CN HCM1 – TT2######1######hangntc2######123456Abc
+Nguyễn Thị Lệ Thúy######CN HCM1 – TT2######1######thuyntl######123456Abc
+Trần Thị Thanh Phương######CN HCM1 – TT2######1######phuongttt######123456Abc
+Tô Phước  Đồng######CN HCM1 – TT2######1######dongtp######123456Abc
+Trần Hồng Thúy######CN HCM1 – TT2######1######thuyth######123456Abc
+Phan Trúc Bình######CN HCM1 – TT2######1######binhpt######123456Abc
+Hoàng Thị Phương Khanh######CN HCM1 – TT2######1######khanhhtp######123456Abc
+Nguyễn Trần Hoàng Lan######CN HCM1 – TT2######1######lannth######123456Abc
+Nguyễn Thị Kim Nga######CN HCM1 – TT2######1######ngantk######123456Abc
+Lê Kim Bảo Ngọc######CN HCM1 – TT2######1######ngoclkb######123456Abc
+Châu Thị Thu Hiền######CN HCM1 – TT2######1######hcm1_hienctt######123456Abc
+Nguyễn Ngọc Khánh######CNHCM3 – TT2######1######nngockhanh######123456Abc
+Nguyễn Thị Vân######CNHCM3 – TT2######1######vannt2######123456Abc
+Nguyễn Phạm Thụy Khanh######CNHCM3 – TT2######1######khanhnpt######123456Abc
+Phạm Thị Ngọc Hà######CNHCM5 – TT2######1######haptn######123456Abc
+Trần Thị Bích Hà######CNHCM5 – TT2######1######hattb######123456Abc
+Lê Thị Thu Hảo######CNHCM5 – TT2######1######haoltt######123456Abc
+Nguyễn Ngọc Tân######CNHCM5 – TT2######1######kams_tannn######123456Abc
+Phan Cẩm Nhung######CNHCM5 – TT2######1######nhungpc######123456Abc
+Phan Thị Thanh Viện######CNHCM5 – TT2######1######vienptt######123456Abc
+Nguyễn Thị Ánh Loan######CNHCM4 – TT2######1######loannta######123456Abc
+Đinh Tiến Khải######CNHCM4 – TT2######1######khaidt######123456Abc
+Phạm Thị Mỹ Dung######CNHCM4 – TT2######1######dungptm######123456Abc
+Huỳnh Thị Thùy Vương######CNHCM4 – TT2######1######vuonghtt######123456Abc
+Nguyễn Minh Toàn######Tổ QLCL- Đài 1090######1######toannm######123456Abc
+Bùi Thị Ngọc Diệp######Tổ QLCL- Đài 1090######1######diepbtn######123456Abc
+Nguyễn Thị Hồng Sang######Tổ QLCL- Đài 1090######1######sangnth######123456Abc
+Cao Thị Hồng Thuý######Tổ QLCL- Đài 1090######1######thuycth######123456Abc
+Nguyễn Hải Quang######Tổ QLCL- Đài 1090######1######quangnh######123456Abc
+Nguyễn Minh Châu######Tổ QLCL- Đài 1090######1######chaunm######123456Abc
+Đỗ Anh Sơn######Tổ QLCL- Đài 1090######1######sonda######123456Abc
+Lê Tấn Minh Phong######Tổ QLCL- Đài 1090######1######phongltm######123456Abc
+Hoàng Thị Khánh Vân######Tổ QLCL- Đài 1090######1######vanhk######123456Abc
+Nguyễn Quang Thuận######Tổ QLCL- Đài 1090######1######thuannq######123456Abc
+Nguyễn Thị Phương Mai######Tổ QLCL- Đài 1090######1######maintp2######123456Abc
+Nguyễn Nhật Anh Thúy######Tổ QLCL- Đài 1090######1######thuynna######123456Abc
+Lê thị Hà######Tổ QLCL- Đài 1090######1######halt2######123456Abc
+Lê Thúy Liên######Tổ QLCL- Đài 1090######1######lienlt######123456Abc
+Thái Thị Thủy######Tổ QLCL- Đài 1090######1######thuytt2######123456Abc
+Nguyễn Hoài Nam######Tổ QLCL- Đài 1090######1######namnh2######123456Abc
+Tổ Xử lý Minh Phúc######Tổ Xử lý Minh Phúc######1######xlvmp######123456Abc
+Tổ Xử lý Trường Minh######Tổ Xử lý Trường Minh######1######xlvtminh######123456Abc
+Tổ Xử lý MobiTechs######Tổ Xử lý MobiTechs######1######xlvmt######123456Abc
+Tổ Khai thác thông tin######Tổ Khai thác TT - Đài 1090######1######thongtin######123456Abc
+Nguyễn Mai Thanh######P.KHDN######1######thanhnm######123456Abc
+Nguyễn Thị Huyền######P.KHDN######1######huyennt5######123456Abc
+Trần Việt Anh######P.KHDN######1######anhtv######123456Abc
+Lê Nguyễn Vũ Vi ######P.CSKH######1######vilnn######123456Abc
+Lê Thị Ngọc Hà######Phòng CSKH######1######haltn######123456Abc
+Võ Anh Dũng######Phòng CSKH######1######dungva######123456Abc
+Lê Thị Mười######Phòng CSKH######1######muoilt######123456Abc
+Lê Thị Thanh Uyên######Phòng CSKH######1######uyenltt1######123456Abc
+Nguyễn Thị Bích Trâm######Phòng CSKH######1######tramntb1######123456Abc
+Nguyễn Ngọc Bích######Phòng KHDN######1######bichnn######123456Abc
+Nguyễn Thị Anh Đào######Phòng KHDN######1######daonta######123456Abc
+Nguyễn Minh Cảnh######Phòng KHDN######1######canhnm######123456Abc
+Phan Thị Phương Chi######Tổ xử lý - Đài 1090######1######chiptp######123456Abc
+Phạm Thị Lệ Chi######Tổ xử lý - Đài 1090######1######chiptl######123456Abc
+Hà Thị Lan######Tổ xử lý - Đài 1090######1######lanht######123456Abc
+Hoàng Trần Thúy Diễm######Tổ xử lý - Đài 1090######1######diemhtt######123456Abc
+Lê Thị Mỹ Linh######Tổ xử lý - Đài 1090######1######linhltm######123456Abc
+Huỳnh Thị Hiền######Tổ xử lý - Đài 1090######1######hienth######123456Abc
+Đỗ Thu Hà######Tổ xử lý - Đài 1090######1######hadt1######123456Abc
+Nguyễn Thị Nga######Tổ xử lý - Đài 1090######1######ngant2######123456Abc
+Đào Thị Hiền######Tổ xử lý - Đài 1090######1######hiendt3######123456Abc
+Trần Ngọc Trí######Tổ HTĐL – Đài 1090######1######Tritn######123456Abc
+Huỳnh Hùng Nam######Tổ TLKH – Đài 1090######1######namhh######123456Abc
+Phạm Trần Tú Anh######Tổ TLKH – Đài 1090######1######anhpt######123456Abc
+Võ Nguyễn Quỳnh Hương######Tổ TLKH – Đài 1090######1######huongvnq######123456Abc
+Nguyễn Ngọc Ninh######Tổ TLKH – Đài 1090######1######ninhnn######123456Abc
+Phan Thi Quỳnh Nga######Tổ TLKH – Đài 1090######1######ngaptq######123456Abc
+Lê Thị Bích Ngọc######Tổ TLKH – Đài 1090######1######ngocltb######123456Abc
+Bùi Thị Kim Loan######Tổ ĐT – Đài 1090######1######loanbtk######123456Abc
+Đặng Thị Thoa######Tổ Gọi ra– Đài 1090######1######thoadt######123456Abc
+Ngô Văn Đạt######Tổ HTĐL – Đài 1090######1######datvv######123456Abc
+Trần Đăng Thành######Tổ HTĐL – Đài 1090######1######thanhtd######123456Abc
+Nguyễn Thị Hồng Loan######Tổ GS – Đài 1090######1######loannth######123456Abc
+Trần Nguyên Nhật######Tổ GS – Đài 1090######1######nhattn######123456Abc
+Lại Thị Ngọc Liên######Tổ GS – Đài 1090######1######lienltn######123456Abc
+Đõ Thu Thủy######Tổ GS – Đài 1090######1######thuydtt######123456Abc
+Trần Thị Thanh Bình######Tổ GS – Đài 1090######1######binhttt######123456Abc
+Nguyễn Hữu Huy######Tổ GS – Đài 1090######1######huy-ht-nh######123456Abc
+Võ Thị Kim Chi######Tổ GS – Đài 1090######1######chivtk######123456Abc
+Hà Thị Ngọc Thảo######Tổ GS – Đài 1090######1######thaohtn######123456Abc
+Lê Hữu Tài######Tổ GS – Đài 1090######1######tailh######123456Abc
+Dư Thị Dung######Tổ GS – Đài 1090######1######dungt######123456Abc
+Bùi Đỗ Đan Thanh######Phó Đài 1090######1######thanhbdd######123456Abc
+Lã Thị Mỹ Hòa######Đài 1090######1######hoaltm######123456Abc
+Ngô Thị Hương Loan######Đối tác - MobiTechs######1######loannth######123456Abc
+Nguyễn Thị Bé Mùi######Đối Tác - MobiTechs######1######muintb######123456Abc
+Hà Thị Đan Phương######Đối Tác - Minh Phúc######1######phuonghtd######123456Abc
+Lê Thị Ngọc Khánh######Đối Tác - Minh Phúc######1######khanhltn######123456Abc
+Nguyễn Văn Lợi######Đối Tác – Trường Minh######1######loinv######123456Abc
+Nguyễn Bá Hải######Chi nhánh Quảng Bình######1######hainb######123456Abc
+Đoàn Thị Thanh Hiên######Chi nhánh Quảng Bình######1######hiendtt######123456Abc
+Nguyễn Văn Trị######Chi nhánh Quảng Bình######1######trinv######123456Abc
+Lê Kim Ngọc Bích######Chi nhánh Quảng Trị######1######bichlkn######123456Abc
+Hoàng Kim Thành######Chi nhánh Quảng Trị######1######thanhhk######123456Abc
+Lương Việt Dũng######Chi nhánh Huế######1######dunglv######123456Abc
+Võ Thị Thanh Hiền######Chi nhánh Huế######1######hienvtt######123456Abc
+Nguyễn Khoa Trung Hiếu######Chi nhánh Huế######1######hieunkt######123456Abc
+Ngô Thị Diệu Tâm######Chi nhánh Đà Nẵng 1######1######tamntd######123456Abc
+Đặng Thị Kim Thanh######Chi nhánh Đà Nẵng 1######1######thanhdtk######123456Abc
+Tạ Thị Thùy Trang######Chi nhánh Đà Nẵng 1######1######trangttt######123456Abc
+Lê Thị Xuân Hà######Chi nhánh Đà Nẵng 1######1######haltx######123456Abc
+Diệp Dạ Thảo######Chi nhánh Đà Nẵng 1######1######thaodd######123456Abc
+Mai Thị Thuyền######Chi nhánh Đà Nẵng 1######1######thuyenmt######123456Abc
+Nguyễn Vũ Quang Hoàng######Chi nhánh Đà Nẵng 2######1######hoangnvq######123456Abc
+Trần Thế Tài######Chi nhánh Đà Nẵng 2######1######taitt######123456Abc
+Lê Hồng Văn######Chi nhánh Đà Nẵng 2######1######vanlh######123456Abc
+Đỗ Chí Hiếu######Chi nhánh Đà Nẵng 2######1######hieudc######123456Abc
+Chu Đình Long######Chi nhánh Đà Nẵng 2######1######longcd######123456Abc
+######Chi nhánh Đà Nẵng 2######1######ngoctq######123456Abc
+Phan Thị Nhung######Chi nhánh Đà Nẵng 2######1######nhungpt######123456Abc
+Lê Na######Chi nhánh Đà Nẵng 2######1######lena######123456Abc
+Phan Thị Thanh Huệ######Chi nhánh Quảng Nam######1######hueptt1######123456Abc
+Võ Đình Dũng######Chi nhánh Quảng Nam######1######dungvd######123456Abc
+Đỗ Thu Hà######Chi nhánh Quảng Nam######1######hadt######123456Abc
+Ngô Thị Thanh Tâm######Chi nhánh Quảng Nam######1######tamntt######123456Abc
+Võ Thị Tiểu Thảo######Chi nhánh Quảng Nam######1######thaovtt######123456Abc
+Bùi Minh Dũng######Chi nhánh Quảng  Ngãi######1######dungbm######123456Abc
+Hà Văn Mai######Chi nhánh Quảng  Ngãi######1######maihv######123456Abc
+Nguyễn Phước Giang######Chi nhánh Quảng  Ngãi######1######giangnp######123456Abc
+Lý Thị Tú######Chi nhánh Bình Định######1######tult3######123456Abc
+Phan Thị Phương######Chi nhánh Bình Định######1######phuongpt######123456Abc
+Lê Hoàng  thu Thủy######Chi nhánh Bình Định######1######thuylht######123456Abc
+Nguyễn Thụy Lai######Chi nhánh Phú Yên######1######laint######123456Abc
+Võ Thị Việt Nhung######Chi nhánh Phú Yên######1######nhungvtv######123456Abc
+Âu Bảo Trân######Chi nhánh Khánh Hòa######1######tranab######123456Abc
+Võ Sĩ Lam######Chi nhánh Khánh Hòa######1######lamvs######123456Abc
+Bùi Thị Minh Huệ######Chi nhánh Khánh Hòa######1######huebtm######123456Abc
+Phan Văn Sửu######Chi nhánh Đăknông######1######suupv######123456Abc
+Nguyễn Văn Minh######Chi nhánh Đăknông######1######minhnv######123456Abc
+Đỗ Thị Mận######Chi nhánh Đăk Lăk######1######mandt######123456Abc
+Lê Thị Hồng Phi######Chi nhánh Đăk Lăk######1######philth######123456Abc
+Nguyễn Mạnh Trường######Chi nhánh Đăk Lăk######1######truongnm######123456Abc
+Cáp Thái Hà######Chi nhánh Gia Lai######1######hact######123456Abc
+Nguyễn Thị Như Lan######Chi nhánh Gia Lai######1######lanntn1######123456Abc
+Nguyễn Thanh Sơn######Chi nhánh Gia Lai######1######sonnt3######123456Abc
+Hoàng Thị Nguyệt######Chi nhánh Kon Tum######1######nguyetht######123456Abc
+Trịnh Thị Hoa######Chi nhánh Kon Tum######1######hoatt2######123456Abc
+Lê Thị Ngọc Tuyết######P.CNTT######1######tuyetltn######123456Abc
+Ngô Duy Tiến######P.CNTT######1######tiennd1######123456Abc
+Võ Hoàng Đắt######P.CNTT######1######datvh######123456Abc
+Nguyễn Ngọc Vân######P.CSKH######1######vannnc4######123456Abc
+Nguyễn Thị Hoàng Oanh######P.CSKH######1######oanhnth######123456Abc
+Ngô Mai Dung######P.CSKH######1######dungnm2######123456Abc
+Đặng Hồng Xuân######P.KHDN&DVGTGT######1######xuandh######123456Abc
+Nguyễn Tấn Lên######P.KHDN&DVGTGT######1######lennt######123456Abc
+Phan Thị Xuân Huyền######P.KHDN&DVGTGT######1######huyenptx######123456Abc
+Trần Thị Thùy Linh######Đài 1090######1######linhttt######123456Abc
+Nguyễn Thị Phương Thanh######Đài 1090######1######thanhntp######123456Abc
+Dương Quốc Trung######Đài 1090######1######c4_trungdq######123456Abc
+Nguyễn Thị Mỹ Nghiêm######Đài 1090######1######c4_nghiemntm######123456Abc
+Nguyễn Thị Năm######Đài 1090######1######tt4_namnt######123456Abc
+Phạm Võ Trường Duy######Đài 1090######1######tt4_duypvt######123456Abc
+Nguyễn Hồng Điệp######Đài 1090######1######c4_diepnh######123456Abc
+Tổ Xử Lý######Đài 1090######1######toxlc4######123456Abc
+Nguyễn Thế Loan######Đài 1090######1######c4_loannt######123456Abc
+Lê Hoàng Nghiêm######Đài 1090######1######c4_nghiemlh######123456Abc
+Lê Thanh Toàn######Đài 1090######1######c4_toanlt######123456Abc
+Đào Quốc Việt######Đài 1090######1######c4_vietdq######123456Abc
+Nguyễn Thúy Hiền######Đài 1090######1######c4_hiennt######123456Abc
+Trần Thúy Kiều######Đài 1090######1######c4_kieutt######123456Abc
+Nguyễn Văn Toàn######Đài 1090######1######c4_toannv1######123456Abc
+Lý Thị Cẩm Loan######Đài 1090######1######c4_loanltc######123456Abc
+Huỳnh Thị Ngọc Phượng######Đài 1090######1######c4_phuonghtn######123456Abc
+Nguyễn Tuấn Anh######CN Cần Thơ######1######anhnt2######123456Abc
+Nguyễn Thị Ngọc Anh######Đài HTKH 1090######1######c4_anhntn######123456Abc
+Tổ xử lý Mobitechs######Đài HTKH 1090######1######toxlmbt.ht######123456Abc
+Nguyễn thị Điểu######Đài 1090######1######dieunt1.ht######123456Abc
+Trần nam Hưng######Đài 1090######1######hungtn2.ht######123456Abc
+Lê Thị Hải Hà######P.KHDN&DVGTGT######1######halth6######123456Abc
+Nguyễn Thị Minh Trang######Chi nhánh Hải Phòng######1######trangntm2######123456Abc
+Ngô Thị Hải Thái######Chi nhánh Hải Phòng######1######thainh######123456Abc
+Nguyễn Thị Thoa######CH 72 Lạch Tray######1######thoant######123456Abc
+Phạm Thanh Hường######CH 4T THĐ######1######huongpt######123456Abc
+Nguyễn Xuân Định######Chi nhánh Bắc Ninh######1######dinhnx######123456Abc
+Nguyễn Ngọc Quang######Chi nhánh Bắc Ninh######1######quangnn######123456Abc
+Ngô Thị Hoài Thu######CH Bắc Ninh######1######thunth######123456Abc
+Nguyễn Thanh Hương######Chi nhánh Bắc Giang######1######huongnt5######123456Abc
+Nguyễn Thị Trần Huệ######Chi nhánh Bắc Giang######1######huentt######123456Abc
+Nguyễn Thị Vũ######CH Bắc Giang######1######vunt######123456Abc
+Trần Quang Huy######Chi nhánh Hải Dương######1######huytq6######123456Abc
+Vũ Thị Tuyết######CH Hải Dương######1######tuyetvt######123456Abc
+Tường Trung Thành######Chi nhánh Hưng Yên######1######thanhtt######123456Abc
+Đỗ Đức Anh######Chi nhánh Hưng Yên######1######anhdd2######123456Abc
+Nguyễn Trung Nghĩa######CH Hưng Yên######1######nghiant######123456Abc
+Hoàng Minh Sơn######Chi nhánh Thái Bình######1######sonhm######123456Abc
+Hoàng Cao Khanh######Chi nhánh Thái Bình######1######khanhhc######123456Abc
+Hà Thị Thu######CH Thái Bình######1######thuht######123456Abc
+Trương THị Hòa######Chi nhánh Nam ĐInh######1######hoatt4######123456Abc
+Nguyễn Phong Hiếu######CH Nam ĐInh######1######hieunp######123456Abc
+Phạm Thị Hải Yên######Chi nhánh Quảng Ninh 1######1######yenpth######123456Abc
+Nguyễn Thị Quỳnh Trang ######Chi nhánh Quảng Ninh 1######1######trangntq######123456Abc
+Nguyễn Văn Chín######CH Hạ Long######1######chinnv######123456Abc
+Trịnh Ngọc Quyên######CH Uông Bí######1######quyentn######123456Abc
+Đỗ Thị Thúy Hà######Chi nhánh Quảng Ninh 2.1######1######hadtt5######123456Abc
+Lương Thị Cúc######CH Cẩm Phả######1######cuclt######123456Abc
+Nguyễn Minh Kha######Chi nhánh Quảng Ninh 2.2######1######khanm######123456Abc
+Bùi Thị Như Quỳnh######Chi nhánh Quảng Ninh 2.2######1######quynhbtn######123456Abc
+Nguyễn Thị Hân######CH Móng Cái Quảng Ninh 2.2######1######hannt######123456Abc
+Nguyễn Thị Lệ######Chi nhánh Lạng Sơn######1######lent######123456Abc
+Nguyễn Thị Mừng######Chi nhánh Lạng Sơn######1######mungnt######123456Abc
+Ngô Thị Hương Quỳnh######Chi nhánh Cao Bằng - Bắc Kan######1######quynhnth######123456Abc
+Nguyễn Thị Như Trang######Chi nhánh Cao Bằng - Bắc Kan######1######trangntn1######123456Abc
+Phạm Đức Hải######Chi nhánh Hà Giang - Tuyên Quang######1######haipd######123456Abc
+Lương Văn Hải######Chi nhánh Hà Giang - Tuyên Quang######1######hailv######123456Abc
+Nguyễn Thị Loan######CH Hà Giang######1######loannt######123456Abc
+Trần Thị Trà My######Chi nhánh Thái Nguyên######1######myttt######123456Abc
+Nguyễn Thị Huyền######CH  Thái Nguyên######1######huyennt######123456Abc
+Bùi Thị Xuân Thảo######P.CSKH######1######thaobtx######123456Abc
+Trần Thị Trang Nhung######P.CSKH######1######nhungttt######123456Abc
+Nguyễn Thị Thanh Thủy######P.CSKH######1######thuyntt3######123456Abc
+Nguyễn Việt Hưng######P.KHDN######1######hungnv5######123456Abc
+Bùi Quốc Dũng######P.KHDN######1######dungbq2######123456Abc
+Vũ Chí Cương######P.KHDN######1######cuongvc######123456Abc
+Hà Thị Thu Hằng######P.CNTT######1######hanghtt######123456Abc
+Diễm Thị Thu Trang######Đài 1090######1######trangdtt######123456Abc
+Trần Thị Huệ######Đài 1090######1######huett1######123456Abc
+Lê Quang Hiệp######Đài 1090######1######hieplq######123456Abc
+Nguyễn Thùy Linh######Đài 1090######1######linhnt2######123456Abc
+Đặng Thương Thương######Đài 1090######1######thuongdt######123456Abc
+Nguyễn Mai Trung######Đài 1090######1######c5_trungnm_mbt######123456Abc
+Nguyễn Thị Huệ######P.KHDN&GVGTGT######1######huent1######123456Abc
+Lê Thị Hải Hà######P.KHDN&GVGTGT######1######halth.ht######123456Abc
+Hồ Ngọc Anh######P.KHDN######1######anhhn######123456Abc
+Nguyễn Trung Nghĩa######P.KHDN######1######nghiant######123456Abc
+Đinh Quang Thiện######P.KHDN######1######thiendq######123456Abc
+Trần Thị Mỹ Hiệp######P.KHDN######1######hiepttm######123456Abc
+Nguyễn Khánh Thành######P.KHDN######1######thanhnk######123456Abc
+Huỳnh Nhật Quỳnh######P.KHDN######1######quynhhn######123456Abc
+Hoàng Việt Hưng######P.KHDN######1######hunghv1######123456Abc
+Nguyễn Thúy Loan######P.KHDN######1######loannt2######123456Abc
+Lâm Huỳnh Thanh Trúc######P.KHDN######1######truclht######123456Abc
+Nguyễn Vũ Trọng Hiệp######P.KHDN######1######hiepnvt######123456Abc
+Phạm Ngọc Tân######P.KHDN######1######tanpn######123456Abc
+Lý Trực Thịnh######Đài HTKH 1090######1######thinhlt######123456Abc
+Hoàng Kim Thái######Đài HTKH 1090######1######thaihk######123456Abc
+Phạm Mạng Hùng######Đài HTKH 1090######1######c6_hungpm######123456Abc
+Nguyễn Thị Hiển######Đài HTKH 1090######1######c6_thihien######123456Abc
+Dương Hoàng Long######Đài HTKH 1090######1######c6_longdh1######123456Abc
+Nguyễn Vũ Hương Thùy######Đài HTKH 1090######1######c6_thuynvh######123456Abc
+Trần Thị Hoài Phương######Đài HTKH 1090######1######c6_phuongtth2######123456Abc
+Nguyễn Thị Bích Hồ######Đài HTKH 1090######1######hontb######123456Abc
+Bùi Thuý An######Đài HTKH 1090######1######anbt1######123456Abc
+Tổ Thông tin######Đài HTKH 1090######1######thongtinc6######123456Abc
+Tổ xử lý Minh Phúc######Tổ xử lý Minh Phúc######1######xlmpc6######123456Abc
+Tổ xử lý Trường Minh######Tổ xử lý Trường Minh######1######xltmc6######123456Abc
+Tổ xử lý Mobitechs######Tổ xử lý Mobitechs######1######xlmbtc6######123456Abc
+Lương Bá Đoàn######CV DVGTGT - CN Long An######1######doanlb######123456Abc
+Nguyễn Thị Trang######CV CSKH - CN Long An######1######trangnt######123456Abc
+Nguyễn Võ Hoài Nam######Trưởng MBF Liên huyện Tân An######1######namnvh######123456Abc
+Trương Tấn Cảnh######Trưởng MBF Liên huyện Mộc Hóa######1######canhtt######123456Abc
+Lê Thanh Tuấn######Trưởng MBF Liên huyện Bến Lức######1######tuanlt######123456Abc
+Mai Thanh Hoàng######Trưởng MBF Liên huyện Đức Hòa######1######hoangmt######123456Abc
+Nguyễn Thị Bích Diệp######P.CSKH######1######diepntb1######123456Abc
+Phạm Phương Trí######CN.Tây Ninh######1######tripp######123456Abc
+Lương Thái Quang######CN.Tây Ninh######1######quanglt2######123456Abc
+Nguyen Thi Thu Hien######CNLD######1######hienntt######123456Abc
+Hoàng thị Thanh Vân######Chi nhánh Bình Phước######1######vanhtt2######123456Abc
+Nguyễn Hoàng Lâm######Chi nhánh Bình Phước######1######lamnh1######123456Abc
+Nguyễn Thị Thảo Nguyên######Phòng Dịch vụ GTGT chi nhánh######1######nguyenntt######123456Abc
+Lê Thị Mỹ Hạnh######Phòng CSKH chi nhánh######1######hanhltm1######123456Abc
+Võ Kim Hiếu######Tổ GQKN chi nhánh######1######hieuvk_dni######123456Abc
+Nguyễn Thị Hải Lý######Cửa hàng trưởng######1######lynth######123456Abc
+Huỳnh Cẩm Thụy######Cửa hàng trưởng######1######thuyhc2######123456Abc
+Vũ Thị Thanh Huyền######Chi nhánh TTDĐ BRVT######1######huyenvtt######123456Abc
+Đoàn Thị Trung Thu######Chi nhánh TTDĐ BRVT######1######thudtt######123456Abc
+Huỳnh Thanh Trúc######Chi nhánh TTDĐ BRVT######1######trucht######123456Abc
+Nguyễn Thị Thảo######Chi nhánh TTDĐ BRVT######1######thaont1######123456Abc
+Bùi Thị Mai Hoa######Chi nhánh TTDĐ BRVT######1######hoabtm######123456Abc
+Hoàng Quốc Long######Chi nhánh TTDĐ BRVT######1######longhq######123456Abc
+Nguyễn Hữu Tân######GĐCN######1######tannh1######123456Abc
+Nguyễn Mạnh Quốc######VAS######1######quocnm######123456Abc
+Nguyễn Thị Mai Bông######Tổ hỗ trợ KPP######1######bongntm_bth######123456Abc
+Phạm Thế Duy######Tổ KHDN######1######duypt_bth######123456Abc
+Trần Thị Kim Thoa######CV VAS CNBD######1######thoattk######123456Abc
+Đoàn Thị Diệu Hiền######CV CSKH & GQKN CNBD######1######hiendtd######123456Abc
+Cao Tấn Tài######NV KHDN CNBD######1######c6_cnbd.taict######123456Abc
+Lê Thị Ngọc Anh######CV KHDN CNBD######1######anhltn######123456Abc
+Nguyễn Thị Hòa######CN Ninh Thuận######1######hoant2######123456Abc
+Nguyễn Thị Hải Yến######CN Ninh Thuận######1######yennth######123456Abc
+Nguyễn Hải Trường######CN Ninh Thuận######1######truongnh######123456Abc
+Nguyễn Thương######CN Ninh Thuận######1######thuongn######123456Abc
+Trương Viễn Tấn######CN Ninh Thuận######1######tantv######123456Abc
+Phạm Thị Huê######P.KHM######1######huept1######123456Abc
+CNHN######CNHN######1######vashn######123456Abc
+CNĐN######CNĐN######1######vasdn######123456Abc
+CNHCM######CNHCM######1######vashcm######123456Abc
+Đoàn Thị Thúy Hà###### NA######1######c3_ht_hadtt######123456Abc
+Phạm Thị Thanh Hà###### NA######1######c3_ht_haptt######123456Abc
+Đỗ Hà Nam###### NA######1######c3_ht_namdh######123456Abc
+Phạm Ái Sa###### NA######1######c3_ht_sapta######123456Abc
+Cao Thị Như Thảo###### NA######1######c3_ht_thaoctn######123456Abc
+Hoàng Thị Phương Thảo###### NA######1######c3_ht_thaohtp######123456Abc
+Trần Thị Xuân Thảo###### NA######1######c3_ht_thaottx######123456Abc
+Hoàng Thị Thơm###### NA######1######c3_ht_thomht######123456Abc
+Nguyễn Cữu Phong Thủy###### NA######1######c3_ht_thuyncp######123456Abc
+Thái Lê Thu Thảo###### NA######1######thaotlt######123456Abc
+Ngô Mai Thanh###### NA######1######thanhnm######123456Abc
+Phạm Thị Thu Thủy###### NA######1######thuyptt######123456Abc
+Hồ Thị Ngọc Lan###### NA######1######lanhtn######123456Abc
+Phan Văn Định###### NA######1######dinhpv######123456Abc
+Tạ Thị Thanh Lý###### NA######1######lyttt1######123456Abc
+Nguyễn Công Thành###### NA######1######thanhnc######123456Abc
+Nguyễn Tuấn Vương###### NA######1######vuongnt######123456Abc
