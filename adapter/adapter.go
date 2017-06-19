@@ -300,14 +300,17 @@ func Adapter_Handler(ctx *gin.Context) {
 		return
 	}
 	raw, _ := json.Marshal(register)
+	log.Info(string(raw))
 	//push
 	if register.Interaction == "recevie_register_sub" {
 		gs.PushMsgRegister <- raw
-	} else {
+		log.Info("send to register rabbitmq OK")
+	} else if register.Interaction == "recevie_un_register_sub" {
 		gs.PushMsgUnRegister <- raw
+		log.Info("send to un-register rabbitmq OK")
+	} else {
+		return
 	}
-
-	log.Info("send to rabbitmq OK")
 }
 
 func main() {
@@ -316,7 +319,7 @@ func main() {
 	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_register_sub"].Key, gs.PushMsgRegister)
 
 	gs.Wait.Add(1)
-	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_un_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_register_sub"].Key, gs.PushMsgUnRegister)
+	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["recevie_un_register_sub"].Exchange, conf.RabbitMq.Producer["recevie_un_register_sub"].Key, gs.PushMsgUnRegister)
 
 	gs.Wait.Add(1)
 	go amqputil.MakeProducer(&gs.Wait, conf.RabbitMq.Uri, conf.RabbitMq.Producer["waiting_mt_send"].Exchange, conf.RabbitMq.Producer["waiting_mt_send"].Key, gs.PushMT)
