@@ -243,33 +243,50 @@ func Sendmsg_Handler(ctx *gin.Context) {
 		log.Error("cannot decode json from POST")
 		return
 	}
-	log.Info("POST with data %v", phones.Msisdns)
-	//	content := ""
-	//	if phones.Type == conf.Misc.VSType {
-	//		content = getContentByDay()
-	//	} else {
-	//		content = conf.Misc.ThreeDayContent
-	//	}
-
-	//build msg
-	for _, msisdn := range phones.Msisdns {
-		send_mt := SendMsg{
-			Interaction:   "waiting_mt_send",
-			Source:        "PTNH",
-			Msisdn:        msisdn,
-			TimeStamp:     time.Now().Format(LAYOUT),
-			ShortCode:     "9432",
-			SmsMO:         "",
-			SubCode:       "",
-			SmsMT:         fmt.Sprintf(conf.Misc.ThreeDayContent, msisdn),
-			Type:          EMessageType["SYSTEM_CONTENT"],
-			RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
-			TransactionID: fmt.Sprintf("%s%d", "trans_", time.Now().UnixNano()),
+	// log.Info("POST with data %v", phones.Msisdns)
+	content := ""
+	if phones.Type == conf.Misc.VSType {
+		content = getContentByDay()
+		for _, msisdn := range phones.Msisdns {
+			send_mt := SendMsg{
+				Interaction:   "waiting_mt_send",
+				Source:        "PTNH",
+				Msisdn:        msisdn,
+				TimeStamp:     time.Now().Format(LAYOUT),
+				ShortCode:     "9432",
+				SmsMO:         "",
+				SubCode:       "",
+				SmsMT:         content,
+				Type:          EMessageType["SYSTEM_CONTENT"],
+				RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
+				TransactionID: fmt.Sprintf("%s%d", "trans_", time.Now().UnixNano()),
+			}
+			raw, _ := json.Marshal(send_mt)
+			//push
+			gs.PushMT <- raw
+			log.Info("send to rabbitmq OK")
 		}
-		raw, _ := json.Marshal(send_mt)
-		//push
-		gs.PushMT <- raw
-		log.Info("send to rabbitmq OK")
+	} else {
+		for _, msisdn := range phones.Msisdns {
+			send_mt := SendMsg{
+				Interaction:   "waiting_mt_send",
+				Source:        "PTNH",
+				Msisdn:        msisdn,
+				TimeStamp:     time.Now().Format(LAYOUT),
+				ShortCode:     "9432",
+				SmsMO:         "",
+				SubCode:       "",
+				SmsMT:         fmt.Sprintf(conf.Misc.ThreeDayContent, msisdn),
+				Type:          EMessageType["SYSTEM_CONTENT"],
+				RequestID:     fmt.Sprintf("%s%d", "req_", time.Now().UnixNano()),
+				TransactionID: fmt.Sprintf("%s%d", "trans_", time.Now().UnixNano()),
+			}
+			raw, _ := json.Marshal(send_mt)
+			//push
+			gs.PushMT <- raw
+			log.Info("send to rabbitmq OK")
+		}
+		return
 	}
 
 }
