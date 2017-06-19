@@ -195,16 +195,28 @@ func CallBack_Handler(ctx *gin.Context) {
 		}
 		//POST to application
 		log.Info("POST to Application OK")
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn")
-		return
-	} else if resultCode == "WCG-0021" {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_denied.html")
-		return
-	} else if resultCode == "WCG-0026" {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_duplicated.html")
+
+	}
+	if callback_type == "0" {
+		//information for un_reg
+		if resultCode == ERROR_CONGTT_SUCCESSFUL {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unreg_successful.html")
+			return
+		} 
+		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unreg_unsuccessful.html")
 		return
 	} else {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn")
+		if resultCode == ERROR_CONGTT_SUCCESSFUL {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/successful.html")
+			return
+		} else if resultCode == "WCG-0021" {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_denied.html")
+			return
+		} else if resultCode == "WCG-0026" {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_duplicated.html")
+			return
+		}
+		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unsuccessful.html")
 		return
 	}
 
