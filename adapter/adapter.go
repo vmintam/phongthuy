@@ -299,6 +299,9 @@ func Adapter_Handler(ctx *gin.Context) {
 		log.Error("cannot decode json from POST")
 		return
 	}
+	if register.ErrorCode == "WCG-0024" {
+		register.ErrorCode = "WCG-0000"
+	}
 	raw, _ := json.Marshal(register)
 	//push
 	if register.Interaction == "recevie_register_sub" {
