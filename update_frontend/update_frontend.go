@@ -77,17 +77,18 @@ var gs *GlobalSession = &GlobalSession{
 var sqldb *sql.DB
 
 const (
-	CALLBACK                = `/callback_authentication`
-	SPID                    = `001011`
-	CPID                    = `001011`
-	USERNAME                = `phongthuynguhanh`
-	PASSWORD                = `phongthuy@123p`
-	API_CREATE_USER         = `http://cms.phongthuynguhanh.com.vn/api/savecustomer.html`
-	API_UPDATE_CATE         = `http://cms.phongthuynguhanh.com.vn/api/updatepackagecustomer.html`
-	API_UPDATE_STATUS       = `http://cms.phongthuynguhanh.com.vn/api/updatestatuscustomer.html`
-	API_UPDATE_PASSWORD     = `http://cms.phongthuynguhanh.com.vn/api/updatepasscustomer.html`
-	ERROR_CONGTT_SUCCESSFUL = "WCG-0000"
-	LAYOUT                  = "2006-02-01 15:04:01"
+	CALLBACK                      = `/callback_authentication`
+	SPID                          = `001011`
+	CPID                          = `001011`
+	USERNAME                      = `phongthuynguhanh`
+	PASSWORD                      = `phongthuy@123p`
+	API_CREATE_USER               = `http://cms.phongthuynguhanh.com.vn/api/savecustomer.html`
+	API_UPDATE_CATE               = `http://cms.phongthuynguhanh.com.vn/api/updatepackagecustomer.html`
+	API_UPDATE_STATUS             = `http://cms.phongthuynguhanh.com.vn/api/updatestatuscustomer.html`
+	API_UPDATE_PASSWORD           = `http://cms.phongthuynguhanh.com.vn/api/updatepasscustomer.html`
+	ERROR_CONGTT_SUCCESSFUL       = "WCG-0000"
+	ERROR_CONGTT_UNREG_SUCCESSFUL = "WCG-0024"
+	LAYOUT                        = "2006-02-01 15:04:01"
 )
 
 func post(url string, data *bytes.Buffer) (body []byte, err error) {
@@ -286,7 +287,6 @@ func UpdatePackage(phone string, pkgcode string, kind string) (resp Response) {
 	return resp
 }
 
-
 //TODO update status of user
 func UpdateUserStatus(phone string, status string) (resp Response) {
 	ud_cate_req := url.Values{}
@@ -313,7 +313,7 @@ func UnRegisterHandler(body []byte) bool {
 		log.Error("%v", err)
 		return false
 	}
-	if newAction.ErrorCode == ERROR_CONGTT_SUCCESSFUL {
+	if newAction.ErrorCode == ERROR_CONGTT_SUCCESSFUL || newAction.ErrorCode == ERROR_CONGTT_UNREG_SUCCESSFUL {
 		//update package vao web
 		resp_pkg := UpdatePackage(newAction.Msisdn, strings.Trim(newAction.SubCode, " "), "0")
 		if resp_pkg.Error != "0" {
@@ -374,6 +374,7 @@ func RegisterHandler(body []byte) bool {
 					log.Error("%v", err)
 					return false
 				}
+
 				log.Info("resp from API %s", string(resp))
 				//send to mt queue
 				//send password
@@ -395,6 +396,9 @@ func RegisterHandler(body []byte) bool {
 				gs.PushMsg <- send_mt_json
 			}
 		}
+
+		//update status
+		UpdateUserStatus(newAction.Msisdn, "1")
 		//update package vao web
 		resp_pkg := UpdatePackage(newAction.Msisdn, strings.Trim(newAction.SubCode, " "), "1")
 		if resp_pkg.Error != "0" {

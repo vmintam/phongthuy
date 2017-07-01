@@ -24,10 +24,7 @@ type MySqlConf struct {
 }
 
 type MiscConf struct {
-	SendDaily    int32  `toml:"send_daily"`
-	SendThreeDay int32  `toml:"send_threeday"`
-	Url          string `toml:"url"`
-	Content      string `toml:"content"`
+	BadString []string `toml:"bad_array_string"`
 }
 type BGConf struct {
 	MySql MySqlConf `toml:"mysql"`
@@ -139,6 +136,11 @@ func getHoangDao(url string) error {
 					s.Find("table").Remove()
 					s.Find("strong").Remove()
 				}).Html()
+				for _, str := range conf.Misc.BadString {
+					if strings.Contains(content, str) {
+						content = strings.Replace(content, str, "", -1)
+					}
+				}
 				log.Info(content)
 				if err != nil {
 					log.Error("%v", err)
@@ -207,7 +209,7 @@ func insertDB(table string, data map[string]string) bool {
 }
 
 func main() {
-	// getHoangDao("http://lichngaytot.com/tu-vi-ngay-19-06-2017.html")
-	getVanSu("http://lichvansu.wap.vn/tag/12-con-giap.html")
+	getHoangDao("http://lichngaytot.com/tu-vi-ngay-19-06-2017.html")
+	// getVanSu("http://lichvansu.wap.vn/tag/12-con-giap.html")
 	log.Info("this is main function")
 }

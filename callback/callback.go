@@ -37,13 +37,14 @@ var (
 )
 
 const (
-	CALLBACK                = `/callback_authentication`
-	SPID                    = `001011`
-	CPID                    = `001011`
-	USERNAME                = `phongthuynguhanh`
-	PASSWORD                = `phongthuy@123p`
-	ERROR_CONGTT_SUCCESSFUL = "WCG-0000"
-	LAYOUT                  = "2006-01-02 15:04:01" // phai la 2006-01-02, ko duoc 2006-02-01
+	CALLBACK                      = `/callback_authentication`
+	SPID                          = `001011`
+	CPID                          = `001011`
+	USERNAME                      = `phongthuynguhanh`
+	PASSWORD                      = `phongthuy@123p`
+	ERROR_CONGTT_SUCCESSFUL       = "WCG-0000"
+	ERROR_CONGTT_UNREG_SUCCESSFUL = "WCG-0024"
+	LAYOUT                        = "2006-01-02 15:04:01" // phai la 2006-01-02, ko duoc 2006-02-01
 )
 
 func GenerateMd5(str string) string {
@@ -163,48 +164,94 @@ func CallBack_Handler(ctx *gin.Context) {
 		interaction = "recevie_un_register_sub"
 		sms_content = "hủy trên website http://phongthuynguhanh.com.vn"
 		msg_type = EMessageType["USER_UNREGISTER"]
+		//check status code
+		if resultCode == ERROR_CONGTT_UNREG_SUCCESSFUL {
+			//TODO send password
+			send_mt := RegisterMsg{
+				Interaction:   interaction,
+				Msisdn:        msisdn,
+				TimeStamp:     time.Now().Format(LAYOUT),
+				ServiceCode:   "PTNH",
+				SubCode:       strings.Trim(pkg_code, " "),
+				ShortCode:     shortcode,
+				SmsMO:         fmt.Sprintf("Huy gói cước %s", pkg_code),
+				Price:         price,
+				SmsMT:         sms_content,
+				Source:        "WEB",
+				TransactionID: transaction_id,
+				ErrorCode:     resultCode,
+				Type:          msg_type,
+			}
+
+			raw, _ := json.Marshal(send_mt)
+			_, err := post(conf.Misc.AdapterURL, raw)
+			if err != nil {
+				log.Error("%v", err)
+				return
+			}
+			//POST to application
+			log.Info("POST to Application OK")
+
+		}
 	} else {
 		interaction = "recevie_register_sub"
 		sms_content = "ĐK trên website http://phongthuynguhanh.com.vn"
 		msg_type = EMessageType["USER_REGISTER"]
-	}
-	//check status code
-	if resultCode == ERROR_CONGTT_SUCCESSFUL {
-		//TODO send password
-		send_mt := RegisterMsg{
-			Interaction:   interaction,
-			Msisdn:        msisdn,
-			TimeStamp:     time.Now().Format(LAYOUT),
-			ServiceCode:   "PTNH",
-			SubCode:       strings.Trim(pkg_code, " "),
-			ShortCode:     shortcode,
-			SmsMO:         fmt.Sprintf("dk gói cước %s", pkg_code),
-			Price:         price,
-			SmsMT:         sms_content,
-			Source:        "WEB",
-			TransactionID: transaction_id,
-			ErrorCode:     resultCode,
-			Type:          msg_type,
-		}
+		//check status code
+		if resultCode == ERROR_CONGTT_SUCCESSFUL {
+			//TODO send password
+			send_mt := RegisterMsg{
+				Interaction:   interaction,
+				Msisdn:        msisdn,
+				TimeStamp:     time.Now().Format(LAYOUT),
+				ServiceCode:   "PTNH",
+				SubCode:       strings.Trim(pkg_code, " "),
+				ShortCode:     shortcode,
+				SmsMO:         fmt.Sprintf("dk gói cước %s", pkg_code),
+				Price:         price,
+				SmsMT:         sms_content,
+				Source:        "WEB",
+				TransactionID: transaction_id,
+				ErrorCode:     resultCode,
+				Type:          msg_type,
+			}
 
-		raw, _ := json.Marshal(send_mt)
-		_, err := post(conf.Misc.AdapterURL, raw)
-		if err != nil {
-			log.Error("%v", err)
+			raw, _ := json.Marshal(send_mt)
+			_, err := post(conf.Misc.AdapterURL, raw)
+			if err != nil {
+				log.Error("%v", err)
+				return
+			}
+			//POST to application
+			log.Info("POST to Application OK")
+
+		}
+	}
+
+	if callback_type == "0" {
+		//information for un_reg
+		if resultCode == ERROR_CONGTT_SUCCESSFUL {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unreg_successful.html")
 			return
 		}
-		//POST to application
-		log.Info("POST to Application OK")
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn")
-		return
-	} else if resultCode == "WCG-0021" {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_denied.html")
-		return
-	} else if resultCode == "WCG-0026" {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_duplicated.html")
+		if resultCode == ERROR_CONGTT_UNREG_SUCCESSFUL {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unreg_successful.html")
+			return
+		}
+		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unreg_unsuccessful.html")
 		return
 	} else {
-		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn")
+		if resultCode == ERROR_CONGTT_SUCCESSFUL {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/successful.html")
+			return
+		} else if resultCode == "WCG-0021" {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_denied.html")
+			return
+		} else if resultCode == "WCG-0026" {
+			ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_duplicated.html")
+			return
+		}
+		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/unsuccessful.html")
 		return
 	}
 
