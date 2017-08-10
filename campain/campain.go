@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"crypto/sha256"
 	"crypto/tls"
+	"database/sql"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -15,7 +16,14 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 )
+
+type MySqlConf struct {
+	Connection  string `toml:"connection"`
+	IdleConnNum int    `toml:"idle_conn"`
+	MaxConnNum  int    `toml:"max_conn"`
+}
 
 type ServerConf struct {
 	Binding string `toml:"bind"`
@@ -29,10 +37,12 @@ type MiscConf struct {
 type BGConf struct {
 	Server ServerConf `toml:"server"`
 	Misc   MiscConf   `toml:"misc"`
+	MySql  MySqlConf  `toml:"mysql"`
 }
 
 var (
-	conf BGConf
+	conf  BGConf
+	sqldb *sql.DB
 )
 
 const (
@@ -71,6 +81,20 @@ func init() {
 	}
 	log.Info("%+v", conf)
 	//Init mysql
+	var err error
+	sqldb, err = sql.Open("mysql", conf.MySql.Connection)
+	if err != nil {
+		log.Error("Open sql connection %s", err)
+	}
+
+	sqldb.SetMaxIdleConns(conf.MySql.IdleConnNum)
+	sqldb.SetMaxOpenConns(conf.MySql.MaxConnNum)
+
+	err = sqldb.Ping()
+
+	if err != nil {
+		log.Error("Mysql ping sql user info error: %s", err)
+	}
 
 }
 
@@ -117,7 +141,14 @@ func CallBack_Handler(ctx *gin.Context) {
 	log.Info("redirect link %s", redirect)
 	// check type is register or unregister
 	ctx.Redirect(http.StatusMovedPermanently, redirect)
-
+	//insert into database
+	query := fmt.Sprintf("insert into `campains` (`source`,`package`,`msisdn`) values ('%s', '%s', '%s')", source, strings.ToUpper(pkg_code), msisdn)
+	log.Info(query)
+	_, err := sqldb.Exec(query)
+	if err != nil {
+		log.Error("%v", err)
+		return
+	}
 }
 
 func main() {

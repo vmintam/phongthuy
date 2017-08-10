@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"crypto/sha256"
 	"crypto/tls"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -16,7 +17,14 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 )
+
+type MySqlConf struct {
+	Connection  string `toml:"connection"`
+	IdleConnNum int    `toml:"idle_conn"`
+	MaxConnNum  int    `toml:"max_conn"`
+}
 
 type ServerConf struct {
 	Binding string `toml:"bind"`
@@ -30,10 +38,12 @@ type MiscConf struct {
 type BGConf struct {
 	Server ServerConf `toml:"server"`
 	Misc   MiscConf   `toml:"misc"`
+	MySql  MySqlConf  `toml:"mysql"`
 }
 
 var (
-	conf BGConf
+	conf  BGConf
+	sqldb *sql.DB
 )
 
 const (
@@ -70,6 +80,20 @@ func init() {
 	}
 	log.Info("%+v", conf)
 	//Init mysql
+	var err error
+	sqldb, err = sql.Open("mysql", conf.MySql.Connection)
+	if err != nil {
+		log.Error("Open sql connection %s", err)
+	}
+
+	sqldb.SetMaxIdleConns(conf.MySql.IdleConnNum)
+	sqldb.SetMaxOpenConns(conf.MySql.MaxConnNum)
+
+	err = sqldb.Ping()
+
+	if err != nil {
+		log.Error("Mysql ping sql user info error: %s", err)
+	}
 
 }
 
@@ -140,7 +164,10 @@ func CallBack_Handler(ctx *gin.Context) {
 	hashstring := ctx.DefaultQuery("hashstring", "")
 	callback_type := ctx.DefaultQuery("type", "")
 	day_circle := ctx.DefaultQuery("day_circle", "")
-
+	if resultCode == "WCG-0021" {
+		ctx.Redirect(http.StatusMovedPermanently, "http://phongthuynguhanh.com.vn/register_denied.html")
+		return
+	}
 	//	log.Info("hashstring from cong CP %s", hashstring)
 
 	//check toan ven du lieu
@@ -191,6 +218,14 @@ func CallBack_Handler(ctx *gin.Context) {
 			}
 			//POST to application
 			log.Info("POST to Application OK")
+			//update campain
+			//insert into database
+			query := fmt.Sprintf("update into `campains` set status=1 where msisdn='%s' and package='%s'", msisdn, pkg_code)
+			log.Info(query)
+			_, err = sqldb.Exec(query)
+			if err != nil {
+				log.Error("%v", err)
+			}
 
 		}
 	} else {
@@ -222,6 +257,7 @@ func CallBack_Handler(ctx *gin.Context) {
 				log.Error("%v", err)
 				return
 			}
+			//update to campains of have
 			//POST to application
 			log.Info("POST to Application OK")
 
