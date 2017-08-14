@@ -220,7 +220,7 @@ func CallBack_Handler(ctx *gin.Context) {
 			log.Info("POST to Application OK")
 			//update campain
 			//insert into database
-			query := fmt.Sprintf("update into `campains` set status=1 where msisdn='%s' and package='%s'", msisdn, pkg_code)
+			query := fmt.Sprintf("update into `campains` set status=1 where msisdn='%s' and package='%s' and transactionid=%s", msisdn, pkg_code, transaction_id)
 			log.Info(query)
 			_, err = sqldb.Exec(query)
 			if err != nil {

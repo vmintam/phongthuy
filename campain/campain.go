@@ -140,9 +140,9 @@ func CallBack_Handler(ctx *gin.Context) {
 	redirect := conf.Misc.BaseURL + fmt.Sprintf(POSTFIX, SPID, CPID, transaction_id, RETURNURL, pkg_code, REGTYPE, SHOTCODE, hashstring)
 	log.Info("redirect link %s", redirect)
 	// check type is register or unregister
-	ctx.Redirect(http.StatusMovedPermanently, redirect)
+	ctx.Redirect(http.StatusTemporaryRedirect, redirect)
 	//insert into database
-	query := fmt.Sprintf("insert into `campains` (`source`,`package`,`msisdn`) values ('%s', '%s', '%s')", source, strings.ToUpper(pkg_code), msisdn)
+	query := fmt.Sprintf("insert into `campains` (`source`,`package`,`msisdn`, `transactionid`) values ('%s', '%s', '%s', '%s')", source, strings.ToUpper(pkg_code), msisdn, transaction_id)
 	log.Info(query)
 	_, err := sqldb.Exec(query)
 	if err != nil {
