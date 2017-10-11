@@ -319,10 +319,10 @@ func UnRegisterHandler(body []byte) bool {
 		if resp_pkg.Error != "0" {
 			return false
 		}
-		resp_status := UpdateUserStatus(newAction.Msisdn, "0")
-		if resp_status.Error != "0" {
-			return false
-		}
+		// resp_status := UpdateUserStatus(newAction.Msisdn, "0")
+		// if resp_status.Error != "0" {
+		// 	return false
+		// }
 	}
 	return true
 }
